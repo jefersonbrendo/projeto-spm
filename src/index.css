@@ -1,0 +1,15 @@
+.header-gradient {
+  background: linear-gradient(to right, #9576F7, #8160E5);
+}
+
+.bottom-gradient {
+  background: linear-gradient(to right, #9575F7, #8160E5);
+}
+
+.nav-button-active {
+  background: linear-gradient(to right, #9576F7, #8160E5);
+  border-radius: 9999px;
+  padding: 8px;
+}
+
+
