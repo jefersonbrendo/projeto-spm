@@ -11,7 +11,7 @@ import Cadastro from "./pages/Cadastro";
 import Home from "./pages/Home";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
-import AdicionarContato from "./pages/AdicionarContatoModal";
+import AdicionarContato from "./components/contatos/AdicionarContatoModal";
 
 export default function App() {
   return (
