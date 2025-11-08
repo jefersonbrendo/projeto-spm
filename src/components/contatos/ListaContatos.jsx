@@ -1,5 +1,6 @@
-// src/components/contatos/ListaContatos.jsx
 import { ContatoCard } from "./ContatoCard";
+import { enviarMensagemComLocalizacao } from "../../utils/whatsapp";
+import { useUsuarioAtual } from "../../hooks/useUsuarioAtual";
 
 export function ListaContatos({
   contatos,
@@ -8,6 +9,8 @@ export function ListaContatos({
   onEditarContato,
   onDeletarContato,
 }) {
+  const usuarioNome = useUsuarioAtual();
+
   return (
     <div className="w-full space-y-3">
       {contatos.map((contato, index) => (
@@ -18,7 +21,9 @@ export function ListaContatos({
           onToggleExpand={() => onToggleExpand(index)}
           onEditar={() => onEditarContato(contato)}
           onDeletar={() => onDeletarContato(contato.id)}
-          onEnviar={() => console.log("Enviar acionado para:", contato.nome)}
+          onEnviar={() =>
+            enviarMensagemComLocalizacao(contato.telefone, usuarioNome)
+          }
         />
       ))}
     </div>

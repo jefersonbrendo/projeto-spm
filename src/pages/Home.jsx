@@ -47,7 +47,7 @@ export default function Home() {
         aberto={aberto}
         onToggleMenu={toggleMenu}
         onAdicionar={abrirModalNovo}
-        onAlerta={() => console.log("Alerta acionado!")}
+        contatos={contatos}
       />
 
       {mostrarModal && (

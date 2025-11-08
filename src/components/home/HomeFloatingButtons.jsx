@@ -1,4 +1,7 @@
 // src/components/home/HomeFloatingButtons.jsx
+import { enviarAlertaGeral } from "../../utils/alertaGeral";
+import { useUsuarioAtual } from "../../hooks/useUsuarioAtual";
+
 import IconMais from "../../assets/icons/botao-adicionar.svg";
 import IconAlerta from "../../assets/icons/botao-alerta.svg";
 import IconFechar from "../../assets/icons/botao-esconder.svg";
@@ -8,8 +11,10 @@ export function HomeFloatingButtons({
   aberto,
   onToggleMenu,
   onAdicionar,
-  onAlerta,
+  contatos,
 }) {
+  const usuarioNome = useUsuarioAtual();
+
   return (
     <div className="fixed bottom-24 right-6 flex flex-col items-end gap-3 z-50">
       {aberto && (
@@ -18,13 +23,15 @@ export function HomeFloatingButtons({
             <img src={IconMais} alt="Adicionar" className="w-14 h-14" />
           </button>
 
-          <button onClick={onAlerta} className="transition-all duration-300">
-            <img src={IconAlerta} alt="Alerta" className="w-14 h-14" />
+          <button
+            onClick={() => enviarAlertaGeral(contatos, usuarioNome)}
+            className="transition-all duration-300"
+          >
+            <img src={IconAlerta} alt="Alerta geral" className="w-14 h-14" />
           </button>
         </>
       )}
 
-      {/* Botão principal (gira 180° quando o menu está fechado) */}
       <button
         onClick={onToggleMenu}
         className="transition-transform duration-300"
