@@ -102,5 +102,6 @@ export function useHomePage() {
     salvarContato,
     handleDeletarContato,
     contatoEditando,
+    sendMensagem,
   };
 }

@@ -19,7 +19,9 @@ export function ListaContatos({
           onToggleExpand={() => onToggleExpand(index)}
           onEditar={() => onEditarContato(contato)}
           onDeletar={() => onDeletarContato(contato.id)}
-          onEnviar={() => onEnviar && onEnviar(contato)}
+          onEnviar={() => {
+            if (onEnviar) onEnviar(contato);
+          }}
         />
       ))}
     </div>
