@@ -23,6 +23,7 @@ export default function Home() {
     salvarContato,
     handleDeletarContato,
     contatoEditando,
+    sendMensagem,
   } = useHomePage();
 
   return (
@@ -39,6 +40,7 @@ export default function Home() {
             onToggleExpand={handleToggleExpand}
             onEditarContato={abrirModalEditar}
             onDeletarContato={handleDeletarContato}
+            onEnviar={sendMensagem}
           />
         )}
       </div>

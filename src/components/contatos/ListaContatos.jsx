@@ -7,6 +7,7 @@ export function ListaContatos({
   onToggleExpand,
   onEditarContato,
   onDeletarContato,
+  onEnviar,
 }) {
   return (
     <div className="w-full space-y-3">
@@ -18,7 +19,7 @@ export function ListaContatos({
           onToggleExpand={() => onToggleExpand(index)}
           onEditar={() => onEditarContato(contato)}
           onDeletar={() => onDeletarContato(contato.id)}
-          onEnviar={() => console.log("Enviar acionado para:", contato.nome)}
+          onEnviar={() => onEnviar && onEnviar(contato)}
         />
       ))}
     </div>

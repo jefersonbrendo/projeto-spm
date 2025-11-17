@@ -56,6 +56,39 @@ export function useHomePage() {
     }
   };
 
+  const sendMensagem = (contato) => {
+    try {
+      const raw = contato.telefone || "";
+      const digits = raw.replace(/\D/g, "");
+      // assume Brazil (+55) if number has 11 digits
+      let phone = digits;
+      if (digits.length === 11) {
+        if (!phone.startsWith("55")) phone = `55${phone}`;
+      }
+
+      const text = `Olá ${contato.nome}, estou enviando uma mensagem rápida pelo app SAS.`;
+
+      // Prefer WhatsApp (wa.me) when we have international digits
+      if (phone && phone.length >= 8) {
+        const wa = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+        window.open(wa, "_blank", "noopener");
+        return;
+      }
+
+      // Fallback para SMS / telefone
+      if (phone) {
+        const tel = `tel:${phone}`;
+        window.location.href = tel;
+        return;
+      }
+
+      // Se não há telefone, apenas alertar
+      alert(`Nenhum telefone disponível para ${contato.nome}`);
+    } catch (err) {
+      console.error("Erro ao enviar mensagem:", err);
+    }
+  };
+
   return {
     contatos,
     aberto,
