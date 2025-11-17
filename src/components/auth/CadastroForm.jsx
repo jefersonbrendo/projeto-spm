@@ -115,8 +115,18 @@ export function CadastroForm({
       </form>
 
       {/* Mensagens de erro / sucesso */}
-      {erro && <p className="text-red-500 text-sm mt-2">{erro}</p>}
-      {sucesso && <p className="text-green-600 text-sm mt-2">{sucesso}</p>}
+      {erro && (
+        <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-3 rounded mb-4 text-sm whitespace-wrap">
+          <p className="font-bold">❌ Erro:</p>
+          <p>{erro}</p>
+        </div>
+      )}
+      {sucesso && (
+        <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-3 rounded mb-4 text-sm">
+          <p className="font-bold">✅ Sucesso!</p>
+          <p>{sucesso}</p>
+        </div>
+      )}
 
       {/* Link para login */}
       <div className="text-sm text-center text-gray-700 mt-4">

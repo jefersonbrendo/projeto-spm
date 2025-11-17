@@ -68,15 +68,30 @@ export function useCadastro() {
         criadoEm: new Date(),
       });
 
+      setSucesso("Cadastro realizado com sucesso! Redirecionando para login...");
       navigate("/login", { state: { cadastroSucesso: true } });
     } catch (err) {
-      console.error(err);
+      console.error("❌ Erro ao cadastrar:", err);
+      console.error("Código do erro:", err.code);
+      console.error("Mensagem completa:", err.message);
+      
+      // Tratamento detalhado de erros
       if (err.code === "auth/email-already-in-use") {
-        setErro("Este e-mail já está em uso.");
+        setErro("Este e-mail já está cadastrado. Tente outro ou faça login.");
       } else if (err.code === "auth/invalid-email") {
-        setErro("E-mail inválido.");
+        setErro("E-mail inválido. Verifique e tente novamente.");
+      } else if (err.code === "auth/weak-password") {
+        setErro("Senha fraca. Use pelo menos 6 caracteres com números e letras.");
+      } else if (err.code === "auth/operation-not-allowed") {
+        setErro("Autenticação por e-mail desabilitada. Contate suporte.");
+      } else if (err.code?.includes("identity-toolkit") || err.message?.includes("blocked")) {
+        setErro(
+          "⚠️ Firebase está bloqueando requisições. " +
+          "Solução: Remova restrições de domínio no Firebase Console. " +
+          "Detalhes: " + err.message
+        );
       } else {
-        setErro("Erro ao cadastrar: " + err.message);
+        setErro("Erro ao cadastrar: " + (err.message || "Tente novamente"));
       }
     } finally {
       setLoading(false);

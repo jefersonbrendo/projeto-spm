@@ -9,6 +9,7 @@ import SplashScreen from "./pages/SplashScreen";
 import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
 import Home from "./pages/Home";
+import MapaDelegacias from "./pages/MapaDelegacias";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import AdicionarContato from "./components/contatos/AdicionarContatoModal";
@@ -34,6 +35,14 @@ export default function App() {
             element={
               <PrivateRoute>
                 <AdicionarContato />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/mapa-delegacias"
+            element={
+              <PrivateRoute>
+                <MapaDelegacias />
               </PrivateRoute>
             }
           />

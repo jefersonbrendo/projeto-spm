@@ -12,4 +12,24 @@
   padding: 8px;
 }
 
+/* Leaflet Responsividade */
+.leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.leaflet-control {
+  font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  .leaflet-control {
+    font-size: 10px;
+  }
+  
+  .leaflet-popup-content {
+    font-size: 12px !important;
+  }
+}
+
 
