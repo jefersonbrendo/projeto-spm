@@ -9,6 +9,9 @@ import SplashScreen from "./pages/SplashScreen";
 import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
 import Home from "./pages/Home";
+import Mapa from "./pages/Mapa";
+import Leis from "./pages/Leis";
+import Configuracoes from "./pages/Configuracoes";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import AdicionarContato from "./components/contatos/AdicionarContatoModal";
@@ -29,6 +32,34 @@ export default function App() {
               </PrivateRoute>
             }
           />
+
+          <Route
+            path="/mapa"
+            element={
+              <PrivateRoute>
+                <Mapa />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/leis"
+            element={
+              <PrivateRoute>
+                <Leis />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/configuracoes"
+            element={
+              <PrivateRoute>
+                <Configuracoes />
+              </PrivateRoute>
+            }
+          />
+
           <Route
             path="/adicionar-contato"
             element={
