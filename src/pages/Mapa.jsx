@@ -26,7 +26,7 @@ export default function Mapa() {
     // Ícone do usuário (Life360 style)
     const userIcon = L.icon({
       iconUrl: "/icons/icone-user-mapa.png",
-      iconSize: [50, 50],
+      iconSize: [30, 30],
       iconAnchor: [27, 55],
     });
 
@@ -55,7 +55,7 @@ export default function Mapa() {
   };
 
   return (
-    <MainLayout>
+    <MainLayout title="Mapa">
       {!ready ? (
         <div className="flex justify-center items-center h-full">
           <p className="text-lg animate-pulse">Carregando mapa…</p>

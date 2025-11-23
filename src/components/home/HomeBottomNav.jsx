@@ -14,7 +14,7 @@ export function HomeBottomNav() {
     { path: "/home", icon: IconHome },
     { path: "/mapa", icon: IconMapa },
     { path: "/leis", icon: IconMartelo },
-    { path: "/config", icon: IconConfig },
+    { path: "/configuracoes", icon: IconConfig },
   ];
 
   return (

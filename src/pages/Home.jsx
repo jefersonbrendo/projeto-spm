@@ -26,7 +26,7 @@ export default function Home() {
   } = useHomePage();
 
   return (
-    <MainLayout>
+    <MainLayout title="Home">
       <div className="flex flex-col px-4 py-6 bg-white rounded-bl-4xl rounded-br-4xl flex-1 w-full overflow-y-auto">
         {contatos.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center">
