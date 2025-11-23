@@ -18,7 +18,7 @@ export function HomeBottomNav() {
   ];
 
   return (
-    <div className="bottom-gradient px-6 py-3 flex justify-between items-center shadow-inner">
+    <div className="bottom-gradient px-6 py-4 flex justify-between items-center shadow-inner">
       {tabs.map((tab, index) => {
         const ativo = location.pathname === tab.path;
 

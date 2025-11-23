@@ -15,6 +15,8 @@ import Configuracoes from "./pages/Configuracoes";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import AdicionarContato from "./components/contatos/AdicionarContatoModal";
+import "leaflet/dist/leaflet.css";
+
 
 export default function App() {
   return (

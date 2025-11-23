@@ -9,7 +9,8 @@ export function MainLayout({ children }) {
       <HomeHeader />
 
       {/* Área central que cresce e onde o conteúdo da página vive */}
-      <div className="flex-1 flex flex-col w-full">
+      <div className="flex-1 w-full overflow-hidden flex flex-col">
+
         {children}
       </div>
 
