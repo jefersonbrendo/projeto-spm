@@ -3,9 +3,10 @@ import { MainLayout } from "../components/layout/MainLayout";
 import { useMapa } from "../hooks/useMapa";
 import { CenterMapButton } from "../components/map/CenterMapButton";
 import L from "leaflet";
+import { abrirRotaGoogleMaps } from "../utils/maps";
 
 export default function Mapa() {
-  const { posicaoAtual, delegacias, ready } = useMapa();
+  const { posicaoAtual, delegacias, ready, maisProxima } = useMapa();
   const mapRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -23,7 +24,7 @@ export default function Mapa() {
 
     mapRef.current = map;
 
-    // Ícone do usuário (Life360 style)
+    // Ícone do usuário
     const userIcon = L.icon({
       iconUrl: "/icons/icone-user-mapa.png",
       iconSize: [30, 30],
@@ -34,17 +35,57 @@ export default function Mapa() {
       .addTo(map)
       .bindPopup("Você está aqui");
 
-    // Ícones das delegacias
-    const delIcon = L.icon({
+    // Ícone normal de delegacia
+    const delegaciaNormal = L.icon({
       iconUrl: "/icons/delegacia.png",
-      iconSize: [45, 45],
-      iconAnchor: [22, 45],
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
     });
 
-    delegacias.forEach((d) => {
-      L.marker([d.lat, d.lng], { icon: delIcon }).addTo(map).bindPopup(d.nome);
+    // Ícone da delegacia mais próxima (destacado)
+    const delegaciaDestaque = L.icon({
+      iconUrl: "/icons/delegacia.png",
+      iconSize: [55, 55],
+      iconAnchor: [27, 55],
+      className: "pulse-marker", // glow suave (Life360 style)
     });
-  }, [ready, posicaoAtual, delegacias]);
+
+    // Criar marcadores
+    delegacias.forEach((d) => {
+      const isMaisProxima =
+        maisProxima && maisProxima.lat === d.lat && maisProxima.lng === d.lng;
+
+      const icon = isMaisProxima ? delegaciaDestaque : delegaciaNormal;
+
+      const marker = L.marker([d.lat, d.lng], { icon }).addTo(map);
+
+      marker.bindPopup(`
+        <b>${d.nome}</b><br/>
+        ${
+          isMaisProxima
+            ? `<span style="color:#6B4CFF;font-weight:bold">Delegacia mais próxima</span><br/>`
+            : ""
+        }
+        <button 
+          onclick="window.__abrirRotaGoogleMaps(${d.lat}, ${d.lng})"
+          style="
+            margin-top: 6px;
+            padding: 7px 12px;
+            background: #9576F7;
+            color: white;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+          "
+        >
+          Ir
+        </button>
+      `);
+    });
+  }, [ready, posicaoAtual, delegacias, maisProxima]);
+
+  // Expor função global para pop-ups
+  window.__abrirRotaGoogleMaps = abrirRotaGoogleMaps;
 
   const centralizarMapa = () => {
     if (mapRef.current && posicaoAtual) {

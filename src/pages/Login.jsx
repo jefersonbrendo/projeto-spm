@@ -18,26 +18,41 @@ export default function Login() {
   } = useLogin();
 
   return (
-    <div className="w-screen min-h-screen bg-gradient-to-b from-purple-700 via-purple-500 to-white flex flex-col items-center px-4 pt-4 relative">
-      <LoginAlerts cadastroSucesso={cadastroSucesso} erro={erro} />
+    <div className="relative w-screen min-h-screen flex flex-col items-center justify-start px-4 pt-10 overflow-hidden">
+      
+      {/* Fundo com waves */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/wave-bg.svg"
+          alt="Ondas de fundo"
+          className="w-full h-full object-cover"
+        />
+      </div>
 
-      {/* Logo */}
-      <img src="/logo.png" alt="Logo" className="w-24 h-24 mt-4" />
+      {/* Conteúdo */}
+      <div className="relative z-10 w-full flex flex-col items-center ">
+        
+        {/* Alertas */}
+        <LoginAlerts cadastroSucesso={cadastroSucesso} erro={erro} />
 
-      {/* Card de Login (extraído para componente) */}
-      <LoginForm
-        email={email}
-        setEmail={setEmail}
-        senha={senha}
-        setSenha={setSenha}
-        showPassword={showPassword}
-        toggleShowPassword={toggleShowPassword}
-        loading={loading}
-        handleLogin={handleLogin}
-      />
+        {/* Logo */}
+        <img src="/logo.png" alt="Logo" className="w-24 h-24 mt-12" />
 
-      {/* Botões Sociais */}
-      <SocialLoginButtons />
+        {/* Card de Login */}
+        <LoginForm
+          email={email}
+          setEmail={setEmail}
+          senha={senha}
+          setSenha={setSenha}
+          showPassword={showPassword}
+          toggleShowPassword={toggleShowPassword}
+          loading={loading}
+          handleLogin={handleLogin}
+        />
+
+        {/* Botões Sociais */}
+        <SocialLoginButtons />
+      </div>
     </div>
   );
 }

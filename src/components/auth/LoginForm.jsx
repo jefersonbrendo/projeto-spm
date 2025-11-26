@@ -17,7 +17,7 @@ export function LoginForm({
   return (
     <form
       onSubmit={handleLogin}
-      className="bg-purple-100 mt-4 rounded-2xl shadow-lg w-full max-w-sm p-6 z-10"
+      className="bg-purple-100 mt-10 rounded-2xl shadow-lg w-full max-w-sm p-6 z-10"
     >
       <h2 className="text-2xl font-bold text-center text-black mb-1">LOGIN</h2>
       <p className="text-center text-sm text-gray-700 mb-6">Acessa seu conta</p>

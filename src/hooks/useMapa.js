@@ -1,10 +1,28 @@
 // src/hooks/useMapa.js
 import { useEffect, useState } from "react";
 
+// Função Haversine para calcular distância entre coordenadas
+function calcularDistanciaKm(lat1, lon1, lat2, lon2) {
+  const R = 6371; // raio da Terra em KM
+  const dLat = (lat2 - lat1) * (Math.PI / 180);
+  const dLon = (lon2 - lon1) * (Math.PI / 180);
+
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * (Math.PI / 180)) *
+      Math.cos(lat2 * (Math.PI / 180)) *
+      Math.sin(dLon / 2) ** 2;
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c; // km
+}
+
 export function useMapa() {
   const [posicaoAtual, setPosicaoAtual] = useState(null);
   const [delegacias, setDelegacias] = useState([]);
   const [ready, setReady] = useState(false);
+  const [maisProxima, setMaisProxima] = useState(null);
 
   // 1) CAPTURAR LOCALIZAÇÃO ATUAL
   useEffect(() => {
@@ -32,65 +50,45 @@ export function useMapa() {
   // 2) LISTA MANUAL DE DELEGACIAS DE FORTALEZA
   useEffect(() => {
     const listaDelegacias = [
-      {
-        nome: "Delegacia-Geral da Polícia Civil  – Borges de Melo",
-        lat: -3.75920538436976,
-        lng: -38.52605963904237,
-      }, // certo
-      {
-        nome: "5º Distrito Policial – Benfica",
-        lat: -3.741991,
-        lng: -38.524205,
-      },
-      {
-        nome: "7º Distrito Policial – Pirambu",
-        lat: -3.720949,
-        lng: -38.549638,
-      },
-      {
-        nome: "8º Distrito Policial – José Bonifácio",
-        lat: -3.736638,
-        lng: -38.523074,
-      },
-      {
-        nome: "11º Distrito Policial – Pan Americano",
-        lat: -3.754842,
-        lng: -38.542885,
-      },
-      {
-        nome: "12º Distrito Policial – Conjunto Ceará",
-        lat: -3.773784,
-        lng: -38.585748,
-      },
-      {
-        nome: "13º Distrito Policial – Cidade dos Funcionários",
-        lat: -3.7972983685380166,
-        lng: -38.50122994555225,
-      }, // certo
-      {
-        nome: "16º Distrito Policial – Castelão",
-        lat: -3.794292166931239,
-        lng: -38.51824520721979,
-      }, // certo
-      {
-        nome: "25º Distrito Policial – Aeroporto",
-        lat: -3.771976817913626,
-        lng: -38.53710485894492,
-      }, // certo
-      {
-        nome: "30º Distrito Policial – São Cristóvão",
-        lat: -3.788446,
-        lng: -38.589347,
-      },
-      {
-        nome: "34º Distrito Policial – Centro",
-        lat: -3.726942,
-        lng: -38.526523,
-      },
+      { nome: "Delegacia Policial - Vicente Pinzon", lat: -3.731169235144808, lng: -38.46267435618919 },
+      { nome: "Delegacia de Defesa da Mulher", lat: -3.7578458274045183, lng: -38.559861536805506 },
+      { nome: "DHPP - Homicídios e Proteção à Pessoa", lat: -3.7525247383449063, lng: -38.52368332736063 },
+      { nome: "Delegacia-Geral da Polícia Civil – Borges de Melo", lat: -3.75920538436976, lng: -38.52605963904237 },
+      { nome: "2º Distrito Policial - Meireles", lat: -3.731878605845242, lng: -38.50648863153899 },
+      { nome: "10° Distrito Policial - Antônio Bezerra", lat: -3.7400036126980294, lng: -38.59149398972575 },
+      { nome: "11° Distrito Policial - PanAmericano", lat: -3.7540979382537327, lng: -38.56538289599834 },
+      { nome: "13º Distrito Policial – Cidade dos Funcionários", lat: -3.7972983685380166, lng: -38.50122994555225 },
+      { nome: "30º Distrito Policial – São Cristóvão", lat: -3.8317410671977585, lng: -38.517727866216916 },
+      { nome: "32° Distrito Policial - Granja Lisboa", lat: -3.797812372488262, lng: -38.618230983165816 },
+      { nome: "34° Distrito Policial", lat: -3.7316843714843233, lng: -38.53717603565538 },
     ];
 
     setDelegacias(listaDelegacias);
   }, []);
 
-  return { posicaoAtual, delegacias, ready };
+  // 3) CALCULAR A DELEGACIA MAIS PRÓXIMA
+  useEffect(() => {
+    if (!posicaoAtual || delegacias.length === 0) return;
+
+    let menorDistancia = Infinity;
+    let maisPerto = null;
+
+    delegacias.forEach((d) => {
+      const dist = calcularDistanciaKm(
+        posicaoAtual.lat,
+        posicaoAtual.lng,
+        d.lat,
+        d.lng
+      );
+
+      if (dist < menorDistancia) {
+        menorDistancia = dist;
+        maisPerto = { ...d, distanciaKm: dist };
+      }
+    });
+
+    setMaisProxima(maisPerto);
+  }, [posicaoAtual, delegacias]);
+
+  return { posicaoAtual, delegacias, maisProxima, ready };
 }

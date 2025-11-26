@@ -12,7 +12,7 @@ export function ContatoCard({
   onEnviar, // ainda não tem lógica, mas mantenho a prop se quiser usar depois
 }) {
   return (
-    <div className="bg-gray-100 rounded-xl shadow-md px-4 py-3 space-y-2">
+    <div className="bg-gray-100 rounded-xl shadow-md px-4 py-3 space-y-2" onClick={onToggleExpand}>
       {/* Cabeçalho do Contato */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -25,7 +25,7 @@ export function ContatoCard({
         </div>
         <button
           className="text-purple-600 hover:text-purple-800"
-          onClick={onToggleExpand}
+          
         >
           <span className="material-symbols-outlined">
             {isExpanded ? "expand_less" : "expand_more"}

@@ -22,30 +22,44 @@ export default function Cadastro() {
   } = useCadastro();
 
   return (
-    <div className="w-screen min-h-screen bg-gradient-to-b from-purple-700 via-purple-500 to-white flex flex-col items-center px-4 pt-4 relative">
-      {/* Logo */}
-      <img src="/logo.png" alt="Logo" className="w-24 h-24 mt-4" />
+    <div className="relative w-screen min-h-screen flex flex-col items-center justify-start px-4 overflow-hidden">
+      
+      {/* Fundo com SVG */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/wave-bg.svg"
+          alt="Ondas de fundo"
+          className="w-full h-full object-cover"
+        />
+      </div>
 
-      {/* Card de cadastro */}
-      <CadastroForm
-        usuario={usuario}
-        setUsuario={setUsuario}
-        telefone={telefone}
-        setTelefone={setTelefone}
-        email={email}
-        setEmail={setEmail}
-        senha={senha}
-        setSenha={setSenha}
-        showPassword={showPassword}
-        toggleShowPassword={toggleShowPassword}
-        erro={erro}
-        sucesso={sucesso}
-        loading={loading}
-        handleCadastro={handleCadastro}
-      />
+      {/* Conteúdo */}
+      <div className="relative z-10 w-full flex flex-col items-center pt-12">
 
-      {/* Botões sociais */}
-      <CadastroSocialButtons />
+        {/* Logo */}
+        <img src="/logo.png" alt="Logo" className="w-24 h-24 mb-4" />
+
+        {/* Card de cadastro */}
+        <CadastroForm
+          usuario={usuario}
+          setUsuario={setUsuario}
+          telefone={telefone}
+          setTelefone={setTelefone}
+          email={email}
+          setEmail={setEmail}
+          senha={senha}
+          setSenha={setSenha}
+          showPassword={showPassword}
+          toggleShowPassword={toggleShowPassword}
+          erro={erro}
+          sucesso={sucesso}
+          loading={loading}
+          handleCadastro={handleCadastro}
+        />
+
+        {/* Botões sociais */}
+        <CadastroSocialButtons />
+      </div>
     </div>
   );
 }
