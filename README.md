@@ -1,16 +1,25 @@
-# React + Vite
+# SPM — Sistema de proteção para mulheres
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SPM é uma plataforma digital criada para facilitar, orientar e incentivar denúncias de abusos e violências contra mulheres, oferecendo um ambiente seguro e acessível.
 
-Currently, two official plugins are available:
+🌐 **Demo:** https://projeto-spm.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Funcionalidades
+- Botão de alerta rápido: envia mensagem imediata para contatos de emergência via WhatsApp com sua localização atual
+- Mapa interativo em tempo real: mostra a localização da usuária e delegacias mais próximas.
+- Seção de leis: explica os direitos das mulheres e ajuda a identificar situações que podem ser motivo de denúncia.
 
-## React Compiler
+## 🧱 Tecnologias
+- React + Vite
+- JavaScript
+- Tailwind e CSS
+- Firebase
+- Node.js
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Como rodar localmente
+```bash
+git clone https://github.com/jefersonbrendo/projeto-spm.git
+cd projeto-spm
+npm install
+npm run dev
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
